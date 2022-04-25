@@ -1,0 +1,16 @@
+---
+name:  termfrequency
+title: Term Frequency
+menuGroup: termfrequency
+version: '1.0.0'
+jas: '1.2'
+
+options:
+    - name: data
+      type: Data
+
+
+    - name: fretext
+      title: Frequency Variable
+      type: Variable
+...
