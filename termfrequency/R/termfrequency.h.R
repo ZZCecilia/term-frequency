@@ -6,7 +6,8 @@ termfrequencyOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Cla
     inherit = jmvcore::Options,
     public = list(
         initialize = function(
-            dep = NULL, ...) {
+            dep = NULL,
+            fretext = NULL, ...) {
 
             super$initialize(
                 package="termfrequency",
@@ -17,13 +18,19 @@ termfrequencyOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Cla
             private$..dep <- jmvcore::OptionVariable$new(
                 "dep",
                 dep)
+            private$..fretext <- jmvcore::OptionVariable$new(
+                "fretext",
+                fretext)
 
             self$.addOption(private$..dep)
+            self$.addOption(private$..fretext)
         }),
     active = list(
-        dep = function() private$..dep$value),
+        dep = function() private$..dep$value,
+        fretext = function() private$..fretext$value),
     private = list(
-        ..dep = NA)
+        ..dep = NA,
+        ..fretext = NA)
 )
 
 termfrequencyResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
@@ -68,6 +75,7 @@ termfrequencyBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #' 
 #' @param data .
 #' @param dep .
+#' @param fretext .
 #' @return A results object containing:
 #' \tabular{llllll}{
 #'   \code{results$text} \tab \tab \tab \tab \tab a preformatted \cr
@@ -76,20 +84,24 @@ termfrequencyBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #' @export
 termfrequency <- function(
     data,
-    dep) {
+    dep,
+    fretext) {
 
     if ( ! requireNamespace("jmvcore", quietly=TRUE))
         stop("termfrequency requires jmvcore to be installed (restart may be required)")
 
     if ( ! missing(dep)) dep <- jmvcore::resolveQuo(jmvcore::enquo(dep))
+    if ( ! missing(fretext)) fretext <- jmvcore::resolveQuo(jmvcore::enquo(fretext))
     if (missing(data))
         data <- jmvcore::marshalData(
             parent.frame(),
-            `if`( ! missing(dep), dep, NULL))
+            `if`( ! missing(dep), dep, NULL),
+            `if`( ! missing(fretext), fretext, NULL))
 
 
     options <- termfrequencyOptions$new(
-        dep = dep)
+        dep = dep,
+        fretext = fretext)
 
     analysis <- termfrequencyClass$new(
         options = options,

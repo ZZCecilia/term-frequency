@@ -15,3 +15,10 @@ children:
             name: dep
             maxItemCount: 1
             isTarget: true
+      - type: TargetLayoutBox
+        label: Frequency Text
+        children:
+          - type: VariablesListBox
+            name: fretext
+            maxItemCount: 1
+            isTarget: true

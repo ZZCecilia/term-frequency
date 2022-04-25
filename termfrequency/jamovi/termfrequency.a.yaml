@@ -8,10 +8,8 @@ jas: '1.2'
 options:
     - name: data
       type: Data
-
-    - name: dep
-      title: Dependent Variable
+      
+    - name: fretext
+      title: Frequency Text
       type: Variable
-
-    
 ...
