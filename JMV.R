@@ -1,0 +1,7 @@
+# install.packages('jmvtools', repos=c('https://repo.jamovi.org', 'https://cran.r-project.org'))
+jmvtools::check()
+jmvtools::check(home = "C:/Program Files/jamovi 1.2.27.0")
+jmvtools::install()
+jmvtools::create('TermFrequency')
+setwd('TermFrequency')
+jmvtools::addAnalysis(name='ttest', title='Independent Samples T-Test')
